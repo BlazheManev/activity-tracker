@@ -1,46 +1,117 @@
-# Getting Started with Create React App
+# Activity Tracker
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A simple full-stack-ready **Activity Tracking** application built with **React + TypeScript** for the frontend.  
+It allows users to log daily activities, visualize time spent in a ring chart (like Apple Watch), and filter by day.
 
-## Available Scripts
+---
 
-In the project directory, you can run:
+## 🚀 Features
+- **Add, list, and delete activities** with name, description, category, date, and duration.
+- **Activity Ring View** — visual representation of your day's activities and total time spent.
+- **Filter by date** to see only relevant activities.
+- **Local storage persistence** — activities remain after reload.
+- **Responsive design** with modular components.
+- **TypeScript for type safety**.
+- **Unit tests** for core components and logic.
+- **Dockerized** for easy deployment.
+- **GitHub Actions CI** to run tests on every push to `master`.
 
-### `npm start`
+---
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## 📦 Project Structure
+```
+src/
+├── components/        # Reusable UI components
+│   ├── ActivityForm/
+│   ├── ActivityList/
+│   ├── ActivityRing/
+│   └── DayRingView/
+├── context/           # React Context for state management
+├── models/            # TypeScript models & types
+├── services/          # Local storage service for activities
+├── tests/             # Component & logic tests
+└── App.tsx            # Main app entry
+```
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+---
 
-### `npm test`
+## 🛠️ Installation & Setup
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+1. **Clone the repository**
+```bash
+git clone https://github.com/your-username/activity-tracker.git
+cd activity-tracker
+```
 
-### `npm run build`
+2. **Install dependencies**
+```bash
+npm install
+```
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+3. **Run locally**
+```bash
+npm start
+```
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+4. **Run tests**
+```bash
+npm test
+```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+---
 
-### `npm run eject`
+## 🐳 Docker
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+### Build the Docker image
+```bash
+docker build -t activity-tracker-frontend .
+```
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+### Run the container
+```bash
+docker run -p 3000:80 activity-tracker-frontend
+```
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+### Push to Docker Hub
+```bash
+# Login to Docker
+docker login
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+# Tag your image
+docker tag activity-tracker-frontend your-dockerhub-username/activity-tracker-frontend:latest
 
-## Learn More
+# Push the image
+docker push your-dockerhub-username/activity-tracker-frontend:latest
+```
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+---
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+## ⚙️ GitHub Actions CI
+
+This project includes a GitHub Actions workflow located at:
+```
+.github/workflows/test.yml
+```
+It will:
+- Run on every push to `master`
+- Install dependencies
+- Run tests
+
+---
+
+## 🧪 Testing
+
+Run all tests:
+```bash
+npm test
+```
+
+Run tests without watch mode (for CI):
+```bash
+npm test -- --watchAll=false
+```
+
+---
+
+## 📜 License
+This project is licensed under the MIT License.
