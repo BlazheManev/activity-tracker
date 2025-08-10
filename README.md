@@ -5,6 +5,16 @@ It allows users to log daily activities, visualize time spent in a ring chart (l
 
 ---
 
+## Deployment
+
+- The latest version of the app is deployed on Vercel.
+- Vercel automatically builds and deploys on every push to the main branch.
+- Visit the deployed URL to access the live app.
+https://activity-tracker-steel.vercel.app/
+---
+
+---
+
 ## 🚀 Features
 - **Add, list, and delete activities** with name, description, category, date, and duration.
 - **Activity Ring View** — visual representation of your day's activities and total time spent.
