@@ -13,8 +13,6 @@ It allows users to log daily activities, visualize time spent in a ring chart (l
 
 ---
 
----
-
 ## 🚀 Features
 - **Add, list, and delete activities** with name, description, category, date, and duration.
 - **Activity Ring View** — visual representation of your day's activities and total time spent.
