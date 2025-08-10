@@ -54,16 +54,17 @@ export const ActivityProvider: React.FC<React.PropsWithChildren> = ({ children }
     loading: true,
     selectedDate: new Date().toISOString().slice(0, 10), // today by default
   });
-
-  const refresh = useCallback(async () => {
+  const refresh = useCallback(async (date?: string) => {
     dispatch({ type: "SET_LOADING", payload: true });
     try {
-      const items = await activityService.list();
+      const items = await activityService.list(date ?? state.selectedDate);
       dispatch({ type: "SET_ITEMS", payload: items });
     } catch (e: any) {
       dispatch({ type: "SET_ERROR", payload: e?.message ?? "Failed to load" });
+    } finally {
+      dispatch({ type: "SET_LOADING", payload: false });
     }
-  }, []);
+  }, [state.selectedDate]);
 
   const setSelectedDate = (date: string) => {
     dispatch({ type: "SET_DATE", payload: date });

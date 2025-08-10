@@ -1,65 +1,52 @@
-// src/services/activityService.ts
 import { Activity, ActivityId, ActivityInput } from "../models/activity";
+import { API_BASE_URL } from "../config";
 
-const STORAGE_KEY = "activity-tracker:activities";
-
-const uuid = () =>
-  (window.crypto as any)?.randomUUID
-    ? (window.crypto as any).randomUUID()
-    : Math.random().toString(36).slice(2) + Date.now().toString(36);
-
-function load(): Activity[] {
-  try {
-    const raw = localStorage.getItem(STORAGE_KEY);
-    return raw ? (JSON.parse(raw) as Activity[]) : [];
-  } catch {
-    return [];
+async function http<T>(input: RequestInfo, init?: RequestInit): Promise<T> {
+  const res = await fetch(input, {
+    headers: { "Content-Type": "application/json", ...(init?.headers || {}) },
+    ...init,
+  });
+  if (!res.ok) {
+    const msg = await res.text().catch(() => "");
+    throw new Error(`${res.status} ${res.statusText}${msg ? ` - ${msg}` : ""}`);
   }
+  if (res.status === 204) return undefined as T;
+  return (await res.json()) as T;
 }
 
-function save(items: Activity[]) {
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(items));
-}
-
-let db: Activity[] = load();
-
-function sortByDateDesc(a: Activity, b: Activity) {
-  return b.date.localeCompare(a.date);
-}
-
-export async function list(): Promise<Activity[]> {
-  return [...db].sort(sortByDateDesc);
+export async function list(date?: string): Promise<Activity[]> {
+  const url = new URL(`${API_BASE_URL}/api/activities`);
+  if (date) url.searchParams.set("date", date);
+  return http<Activity[]>(url.toString());
 }
 
 export async function create(input: ActivityInput): Promise<Activity> {
-  const item: Activity = { id: uuid(), ...input };
-  db = [...db, item];
-  save(db);
-  return item;
+  return http<Activity>(`${API_BASE_URL}/api/activities`, {
+    method: "POST",
+    body: JSON.stringify(input),
+  });
 }
 
 export async function update(
   id: ActivityId,
   changes: Partial<ActivityInput>
 ): Promise<Activity> {
-  let updated!: Activity;
-  db = db.map((it) => {
-    if (it.id !== id) return it;
-    updated = { ...it, ...changes };
-    return updated;
+  return http<Activity>(`${API_BASE_URL}/api/activities/${id}`, {
+    method: "PUT",
+    body: JSON.stringify(changes),
   });
-  save(db);
-  return updated;
 }
 
 export async function remove(id: ActivityId): Promise<void> {
-  db = db.filter((it) => it.id !== id);
-  save(db);
+  await http<void>(`${API_BASE_URL}/api/activities/${id}`, {
+    method: "DELETE",
+  });
 }
 
+
 export async function clear(): Promise<void> {
-  db = [];
-  save(db);
+  const items = await list();
+  await Promise.all(items.map((a) => remove(a.id)));
 }
 
 export const activityService = { list, create, update, remove, clear };
