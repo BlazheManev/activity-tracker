@@ -72,18 +72,6 @@ docker build -t activity-tracker-frontend .
 docker run -p 3000:80 activity-tracker-frontend
 ```
 
-### Push to Docker Hub
-```bash
-# Login to Docker
-docker login
-
-# Tag your image
-docker tag activity-tracker-frontend your-dockerhub-username/activity-tracker-frontend:latest
-
-# Push the image
-docker push your-dockerhub-username/activity-tracker-frontend:latest
-```
-
 ---
 
 ## ⚙️ GitHub Actions CI
@@ -112,6 +100,3 @@ npm test -- --watchAll=false
 ```
 
 ---
-
-## 📜 License
-This project is licensed under the MIT License.
