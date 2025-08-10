@@ -2,6 +2,7 @@ import React from "react";
 import ActivityForm from "./components/ActivityForm/ActivityForm";
 import ActivityList from "./components/ActivityList/ActivityList";
 import DayRingView from "./components/DayRingView/DayRingView";
+import DateFilter from "./components/DateFilter/DateFilter";
 
 function App() {
   return (
@@ -11,6 +12,7 @@ function App() {
         <p style={{ color: "var(--muted)", margin: "6px 0 0" }}>
           Log your activities and keep an eye on your time.
         </p>
+         <DateFilter />
       </header>
 
       {/* Top: make the ring the hero */}

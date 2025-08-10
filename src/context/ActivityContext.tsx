@@ -13,18 +13,17 @@ type State = {
   items: Activity[];
   loading: boolean;
   error?: string;
+  selectedDate: string;
 };
 
 type Ctx = {
   state: State;
   refresh: () => Promise<void>;
   addActivity: (input: ActivityInput) => Promise<Activity>;
-  updateActivity: (
-    id: ActivityId,
-    changes: Partial<ActivityInput>
-  ) => Promise<Activity>;
+  updateActivity: (id: ActivityId, changes: Partial<ActivityInput>) => Promise<Activity>;
   deleteActivity: (id: ActivityId) => Promise<void>;
   clearAll: () => Promise<void>;
+  setSelectedDate: (date: string) => void;
 };
 
 const ActivityContext = createContext<Ctx | undefined>(undefined);
@@ -34,7 +33,7 @@ type Action =
   | { type: "SET_LOADING"; payload: boolean }
   | { type: "SET_ERROR"; payload?: string };
 
-function reducer(state: State, action: Action): State {
+function reducer(state: State, action: Action | { type: "SET_DATE"; payload: string }): State {
   switch (action.type) {
     case "SET_ITEMS":
       return { ...state, items: action.payload, loading: false, error: undefined };
@@ -42,13 +41,19 @@ function reducer(state: State, action: Action): State {
       return { ...state, loading: action.payload };
     case "SET_ERROR":
       return { ...state, error: action.payload, loading: false };
+    case "SET_DATE":
+      return { ...state, selectedDate: action.payload };
     default:
       return state;
   }
 }
 
 export const ActivityProvider: React.FC<React.PropsWithChildren> = ({ children }) => {
-  const [state, dispatch] = useReducer(reducer, { items: [], loading: true });
+  const [state, dispatch] = useReducer(reducer, {
+    items: [],
+    loading: true,
+    selectedDate: new Date().toISOString().slice(0, 10), // today by default
+  });
 
   const refresh = useCallback(async () => {
     dispatch({ type: "SET_LOADING", payload: true });
@@ -59,6 +64,10 @@ export const ActivityProvider: React.FC<React.PropsWithChildren> = ({ children }
       dispatch({ type: "SET_ERROR", payload: e?.message ?? "Failed to load" });
     }
   }, []);
+
+  const setSelectedDate = (date: string) => {
+    dispatch({ type: "SET_DATE", payload: date });
+  };
 
   const addActivity = useCallback(async (input: ActivityInput) => {
     const created = await activityService.create(input);
@@ -89,8 +98,17 @@ export const ActivityProvider: React.FC<React.PropsWithChildren> = ({ children }
     refresh();
   }, [refresh]);
 
+
   const value = useMemo<Ctx>(
-    () => ({ state, refresh, addActivity, updateActivity, deleteActivity, clearAll }),
+    () => ({
+      state,
+      refresh,
+      addActivity,
+      updateActivity,
+      deleteActivity,
+      clearAll,
+      setSelectedDate,
+    }),
     [state, refresh, addActivity, updateActivity, deleteActivity, clearAll]
   );
 
