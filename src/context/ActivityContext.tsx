@@ -1,4 +1,3 @@
-// src/context/ActivityContext.tsx
 import React, {
   createContext,
   useCallback,

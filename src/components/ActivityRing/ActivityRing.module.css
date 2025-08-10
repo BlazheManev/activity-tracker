@@ -1,0 +1,104 @@
+.wrap {
+    position: relative;
+    display: grid;
+    gap: 12px;
+    justify-items: center;
+}
+
+.header {
+    display: flex;
+    gap: 10px;
+    align-items: baseline;
+}
+
+.title {
+    margin: 0;
+    font-size: 1rem;
+}
+
+.goal {
+    color: var(--muted);
+    font-size: .85rem;
+}
+
+.svg {
+    display: block;
+}
+
+.center text.big {
+    font-size: 1.1rem;
+    fill: var(--text);
+    font-weight: 600;
+}
+
+.center text.sub {
+    font-size: .85rem;
+    fill: var(--muted);
+}
+
+.segment {
+    transition: filter .2s ease, opacity .2s ease;
+}
+
+.segment:hover {
+    filter: brightness(1.05);
+    opacity: .95;
+}
+
+.legend {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 6px;
+    width: 100%;
+}
+
+.legend li {
+    display: grid;
+    grid-template-columns: 16px 1fr auto;
+    align-items: center;
+    gap: 8px;
+    font-size: .9rem;
+}
+
+.dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 999px;
+    border: 1px solid color-mix(in oklab, var(--border) 60%, transparent);
+}
+
+.legLabel {
+    color: var(--text);
+}
+
+.legRight {
+    color: var(--muted);
+    font-variant-numeric: tabular-nums;
+}
+
+.tip {
+    position: absolute;
+    pointer-events: none;
+    background: var(--card);
+    color: var(--text);
+    border: 1px solid var(--border);
+    border-top: 3px solid var(--ring);
+    border-top-color: inherit;
+    /* will be overridden inline */
+    padding: 8px 10px;
+    border-radius: 10px;
+    box-shadow: var(--shadow);
+    font-size: .9rem;
+    z-index: 10;
+}
+
+.tipTitle {
+    font-weight: 600;
+}
+
+.tipMeta {
+    color: var(--muted);
+    font-size: .85rem;
+}

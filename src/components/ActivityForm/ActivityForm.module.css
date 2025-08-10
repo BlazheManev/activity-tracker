@@ -136,7 +136,6 @@ textarea:focus {
     background: color-mix(in oklab, var(--card) 70%, transparent);
 }
 
-/* Error text */
 .error {
     color: var(--danger);
     font-size: .8rem;

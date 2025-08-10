@@ -1,6 +1,7 @@
 import React from "react";
 import ActivityForm from "./components/ActivityForm/ActivityForm";
 import ActivityList from "./components/ActivityList/ActivityList";
+import DayRingView from "./components/DayRingView/DayRingView";
 
 function App() {
   return (
@@ -12,10 +13,27 @@ function App() {
         </p>
       </header>
 
-      <div className="grid">
-        <ActivityForm />
-        <ActivityList />
-      </div>
+      {/* Top: make the ring the hero */}
+      <section
+        style={{
+          display: "grid",
+          justifyItems: "center",
+          marginBottom: 32, // just margin here
+        }}
+      >
+        <DayRingView />
+      </section>
+
+      {/* Below: form + list */}
+      <main className="grid" style={{ alignItems: "start" }}>
+        <aside style={{ display: "grid", gap: 16 }}>
+          <ActivityForm />
+        </aside>
+
+        <section>
+          <ActivityList />
+        </section>
+      </main>
     </div>
   );
 }
