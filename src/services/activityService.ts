@@ -1,5 +1,5 @@
 // src/services/activityService.ts
-import { Activity, ActivityId, ActivityInput } from "../model/activity";
+import { Activity, ActivityId, ActivityInput } from "../models/activity";
 
 const STORAGE_KEY = "activity-tracker:activities";
 

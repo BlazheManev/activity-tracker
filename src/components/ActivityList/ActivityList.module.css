@@ -1,0 +1,33 @@
+.wrap {
+    display: grid;
+    gap: 12px;
+}
+
+.toolbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 8px;
+}
+
+.search {
+    flex: 1;
+    padding: 8px 10px;
+    border: 1px solid #d1d5db;
+    border-radius: 8px;
+}
+
+.count {
+    font-size: 0.85rem;
+    color: #6b7280;
+}
+
+.list {
+    display: grid;
+    gap: 10px;
+}
+
+.empty {
+    display: grid;
+    gap: 8px;
+}

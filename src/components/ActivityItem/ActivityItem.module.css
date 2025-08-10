@@ -1,0 +1,62 @@
+.card {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 12px;
+    padding: 12px;
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+    background: #fff;
+}
+
+.main {
+    display: grid;
+    gap: 4px;
+}
+
+.titleRow {
+    display: flex;
+    align-items: baseline;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.name {
+    font-size: 1rem;
+}
+
+.meta {
+    color: #6b7280;
+    font-size: 0.85rem;
+}
+
+.desc {
+    margin: 0;
+    color: #374151;
+}
+
+.side {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.badge {
+    background: #eef2ff;
+    color: #4338ca;
+    padding: 2px 8px;
+    border-radius: 999px;
+    font-size: 0.75rem;
+}
+
+.danger {
+    border: 1px solid #fecaca;
+    background: #fff1f2;
+    color: #b91c1c;
+    padding: 6px 10px;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.danger:hover {
+    background: #ffe4e6;
+}

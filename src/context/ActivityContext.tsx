@@ -8,7 +8,7 @@ import React, {
   useReducer,
 } from "react";
 import { activityService } from "../services/activityService";
-import { Activity, ActivityId, ActivityInput } from "../model/activity";
+import { Activity, ActivityId, ActivityInput } from "../models/activity";
 
 type State = {
   items: Activity[];
