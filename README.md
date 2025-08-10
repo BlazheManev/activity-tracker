@@ -39,7 +39,7 @@ src/
 
 1. **Clone the repository**
 ```bash
-git clone https://github.com/your-username/activity-tracker.git
+git clone https://github.com/BlazheManev/activity-tracker.git
 cd activity-tracker
 ```
 
