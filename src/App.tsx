@@ -4,15 +4,15 @@ import ActivityList from "./components/ActivityList/ActivityList";
 
 function App() {
   return (
-    <div style={{ maxWidth: 980, margin: "40px auto", padding: 16 }}>
-      <header style={{ marginBottom: 16 }}>
-        <h1 style={{ margin: 0 }}>Activity Tracker</h1>
-        <p style={{ color: "#6b7280", margin: "4px 0 0" }}>
-          Track your free-time activities with a simple form and list.
+    <div className="container">
+      <header style={{ marginBottom: 18 }}>
+        <h1 style={{ margin: 0, fontSize: "1.6rem" }}>Activity Tracker</h1>
+        <p style={{ color: "var(--muted)", margin: "6px 0 0" }}>
+          Log your activities and keep an eye on your time.
         </p>
       </header>
 
-      <div style={{ display: "grid", gridTemplateColumns: "360px 1fr", gap: 16 }}>
+      <div className="grid">
         <ActivityForm />
         <ActivityList />
       </div>

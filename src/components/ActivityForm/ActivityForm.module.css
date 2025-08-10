@@ -1,24 +1,56 @@
 .form {
     display: grid;
-    gap: 12px;
-    padding: 16px;
-    border: 1px solid #e5e7eb;
-    border-radius: 12px;
+    gap: 14px;
+    padding: 18px;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
 }
 
 .title {
-    margin: 0 0 4px;
+    margin: 0 0 2px;
     font-size: 1.1rem;
+    letter-spacing: .2px;
 }
 
 .field {
     display: grid;
-    gap: 6px;
+    gap: 8px;
 }
 
 .field>span {
-    font-size: 0.9rem;
-    color: #374151;
+    font-size: .9rem;
+    color: var(--muted);
+}
+
+input[type="text"],
+input[type="date"],
+input[type="number"],
+textarea {
+    width: 100%;
+    padding: 10px 12px;
+    background: transparent;
+    color: var(--text);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    transition: box-shadow .2s ease, border-color .2s ease;
+    outline: none;
+}
+
+textarea {
+    resize: vertical;
+}
+
+input:focus,
+textarea:focus {
+    border-color: var(--ring);
+    box-shadow: 0 0 0 4px color-mix(in oklab, var(--ring) 20%, transparent);
+}
+
+[aria-invalid="true"] {
+    border-color: var(--danger);
+    box-shadow: 0 0 0 4px color-mix(in oklab, var(--danger) 20%, transparent);
 }
 
 .row {
@@ -27,29 +59,44 @@
     grid-template-columns: 1fr 1fr;
 }
 
+@media (max-width: 520px) {
+    .row {
+        grid-template-columns: 1fr;
+    }
+}
+
 .actions {
     display: flex;
-    gap: 8px;
-    margin-top: 8px;
+    gap: 10px;
+    margin-top: 6px;
 }
 
 button {
-    padding: 8px 12px;
-    border-radius: 8px;
-    border: 1px solid #d1d5db;
-    background: white;
+    padding: 10px 14px;
+    border-radius: 10px;
+    border: 1px solid var(--border);
+    background: var(--accent);
+    color: #fff;
+    box-shadow: var(--shadow);
     cursor: pointer;
 }
 
 button:hover {
-    background: #f9fafb;
+    transform: translateY(-1px);
+}
+
+button:active {
+    transform: translateY(0);
 }
 
 .ghost {
     background: transparent;
+    color: var(--text);
+    border: 1px solid var(--border);
+    box-shadow: none;
 }
 
 .error {
-    color: #b91c1c;
-    font-size: 0.8rem;
+    color: var(--danger);
+    font-size: .8rem;
 }
