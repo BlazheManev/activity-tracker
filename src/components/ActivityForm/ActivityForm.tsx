@@ -1,7 +1,7 @@
 import React, { useMemo, useState } from "react";
 import { useActivities } from "../../context/ActivityContext";
-import styles from "./ActivityForm.module.css";
 import { ActivityInput } from "../../models/activity";
+import styles from "./ActivityForm.module.css";
 
 const emptyForm = (): ActivityInput => ({
   name: "",
@@ -26,6 +26,8 @@ export default function ActivityForm() {
     return e;
   }, [form]);
 
+  const isValid = Object.keys(errors).length === 0;
+
   const hasError = (k: keyof ActivityInput) => touched[k] && errors[k];
 
   const onChange =
@@ -47,7 +49,7 @@ export default function ActivityForm() {
       description: !!form.description,
       category: !!form.category,
     });
-    if (Object.keys(errors).length) return;
+    if (!isValid) return;
     await addActivity(form);
     setForm(emptyForm());
     setTouched({});
@@ -119,10 +121,18 @@ export default function ActivityForm() {
       </div>
 
       <div className={styles.actions}>
-        <button type="submit">Add</button>
+        <button
+          type="submit"
+          className={`${styles.btn} ${styles.primary}`}
+          disabled={!isValid}
+          aria-disabled={!isValid}
+        >
+          Add
+        </button>
+
         <button
           type="button"
-          className={styles.ghost}
+          className={`${styles.btn} ${styles.ghost}`}
           onClick={() => {
             setForm(emptyForm());
             setTouched({});
